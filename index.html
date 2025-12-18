@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Enhedscirklen & Retvinklede trekanter — Introduktion</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="enhedscirklen.css">
+  <link rel="stylesheet" href="pythagoras.css">
+  <link rel="stylesheet" href="eksemplerogopgaver.css">
+</head>
+<body>
+  <header>
+    <h1>Enhedscirklen og retvinklede trekanter</h1>
+    <p class="lead">En enkel og visuel introduktion til Pythagoras, sinus, cosinus og tangent for 8. klasse.</p>
+    <nav>
+      <a href="#unit-circle">Enhedscirklen</a>
+      <a href="#right-triangles">Retvinklede trekanter</a>
+      <a href="#exercises">Øvelser</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="unit-circle" aria-labelledby="uc-heading">
+      <h2 id="uc-heading">Enhedscirklen</h2>
+      <p>Her kan du ændre vinklen og se hvordan cosinus (x) og sinus (y) ændrer sig. Hypotenusen er altid 1 i enhedscirklen.</p>
+
+      <div class="example">
+        <div class="canvas">
+          <svg id="unitSVG" viewBox="0 0 300 300" width="300" height="300" aria-label="Enhedscirkel">
+            <defs>
+              <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 L1,3 z" fill="#333" />
+              </marker>
+            </defs>
+            <circle cx="150" cy="150" r="100" stroke="#333" stroke-width="2" fill="none"></circle>
+            <line x1="50" y1="150" x2="250" y2="150" stroke="#bbb" stroke-width="1"></line>
+            <line x1="150" y1="50" x2="150" y2="250" stroke="#bbb" stroke-width="1"></line>
+
+            <!-- radius line -->
+            <line id="radiusLine" x1="150" y1="150" x2="250" y2="150" stroke="#ff6f61" stroke-width="3" marker-end="url(#arrow)"></line>
+
+            <!-- projection lines -->
+            <line id="xProj" x1="150" y1="150" x2="250" y2="150" stroke="#4A90E2" stroke-width="2" stroke-dasharray="4 3"></line>
+            <line id="yProj" x1="250" y1="150" x2="250" y2="110" stroke="#4A90E2" stroke-width="2" stroke-dasharray="4 3"></line>
+
+            <!-- draggable point -->
+            <circle id="point" cx="250" cy="150" r="8" fill="#ff6f61" stroke="#fff" stroke-width="1" tabindex="0" role="slider" aria-label="Vinkelpunkt" aria-valuemin="0" aria-valuemax="360" aria-valuenow="0"></circle>
+
+            <!-- labels -->
+            <text id="angleLabel" x="10" y="20" font-size="14">vinkel: 0°</text>
+            <text id="cosLabel" x="10" y="40" font-size="14">cos: 1.000</text>
+            <text id="sinLabel" x="10" y="60" font-size="14">sin: 0.000</text>
+            <text id="pythLabel" x="10" y="80" font-size="14">cos² + sin² = 1.000</text>
+            <text id="tanLabel" x="10" y="100" font-size="14">tan: 0.000</text>
+          </svg>
+        </div>
+
+        <div class="controls">
+          <label for="angleRange">Vinkel (°): <output id="angleOut">0</output></label>
+          <input id="angleRange" type="range" min="0" max="360" value="0" step="1" aria-labelledby="uc-heading angleOut">
+
+          <div class="presets" role="group" aria-label="Hurtigvalg vinkler">
+            <button class="preset" data-angle="0" type="button">0°</button>
+            <button class="preset" data-angle="30" type="button">30°</button>
+            <button class="preset" data-angle="45" type="button">45°</button>
+            <button class="preset" data-angle="60" type="button">60°</button>
+            <button class="preset" data-angle="90" type="button">90°</button>
+          </div>
+
+          <p class="hint">Prøv at trække i skyderen, trække punktet på cirklen (eller brug tab + piletasterne).</p>
+          <div class="feedback" id="uc-feedback" aria-live="polite">Tip: Prøv presets som <strong>45°</strong> for at se at cos og sin er lige.<br>Brug skyderen eller piletaster for at udforske andre vinkler.</div>
+          <div id="uc-live" aria-live="polite" class="sr-only" aria-atomic="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <section id="right-triangles" aria-labelledby="rt-heading">
+      <h2 id="rt-heading">Retvinklede trekanter</h2>
+      <p>Se hvordan Pythagoras hænger sammen med sinus, cosinus og tangens. Du kan ændre vinklen og hypotenusen.</p>
+
+      <div class="example">
+        <div class="canvas">
+          <svg id="triSVG" viewBox="0 0 300 200" width="300" height="200" aria-label="Retvinklet trekant">
+            <line id="triA" x1="20" y1="160" x2="260" y2="160" stroke="#333" stroke-width="2"></line>
+            <polyline id="triangle" points="20,160 20,160 260,160" stroke="#ff6f61" stroke-width="3" fill="rgba(255,111,97,0.06)"></polyline>
+
+            <text id="legALabel" x="60" y="140" font-size="13">modstående: 0</text>
+            <text id="legBLabel" x="180" y="140" font-size="13">hosliggende: 0</text>
+            <text id="hypLabel" x="120" y="40" font-size="13">hypotenuse: 1</text>
+            <text id="pythTri" x="10" y="20" font-size="13">a² + b² = c² (tjek): 1.000 = 1.000</text>
+          </svg>
+        </div>
+
+        <div class="controls">
+          <label for="angleTri">Vinkel (°): <output id="angleTriOut">30</output></label>
+          <input id="angleTri" type="range" min="1" max="89" value="30" step="1" aria-labelledby="rt-heading angleTriOut">
+
+          <div class="presets" role="group" aria-label="Hurtigvalg vinkler">
+            <button class="preset-tri" data-angle="30" type="button">30°</button>
+            <button class="preset-tri" data-angle="45" type="button">45°</button>
+            <button class="preset-tri" data-angle="60" type="button">60°</button>
+          </div>
+
+          <label for="hypRange">Hypotenuse: <output id="hypOut">1.00</output></label>
+          <input id="hypRange" type="range" min="0.2" max="3" step="0.01" value="1" aria-labelledby="hypOut">
+
+          <p class="hint">Værdierne opdateres så du kan se beregningerne for trekanterne og Pythagoras.</p>
+          <div id="tri-live" aria-live="polite" class="sr-only" aria-atomic="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <section id="exercises" aria-labelledby="ex-heading">
+      <h2 id="ex-heading">Øvelser</h2>
+      <ol>
+        <li>
+          <div class="exercise">
+            <p>Find cos og sin for 45° i enhedscirklen. Er cos² + sin² = 1?</p>
+            <button class="show-answer" aria-expanded="false">Vis svar</button>
+            <div class="answer">Svar: cos(45°) = sin(45°) = &radic;2/2 ≈ 0.707; cos²+sin² = 0.5+0.5 = 1</div>
+          </div>
+        </li>
+        <li>
+          <div class="exercise">
+            <p>Givet en retvinklet trekant med hypotenuse 5 og vinkel 30°, beregn kateterne.</p>
+            <button class="show-answer" aria-expanded="false">Vis svar</button>
+            <div class="answer">Svar: modstående = 5·sin(30°) = 5·0.5 = 2.5; hosliggende = 5·cos(30°) ≈ 5·0.866 = 4.330</div>
+          </div>
+        </li>
+        <li>
+          <div class="exercise">
+            <p>Hvornår er tangens negativ? Brug enhedscirklen til at vise det.</p>
+            <button class="show-answer" aria-expanded="false">Vis svar</button>
+            <div class="answer">Svar: Tangens er negativ i 2. og 4. kvadrant, hvor sinus og cosinus har modsat fortegn (fx 120° og 300°).</div>
+          </div>
+        </li>
+      </ol> 
+
+      <p class="teacher">Tip til lærere: brug interaktionen til at lave korte opgaver — lad eleverne notere værdier og forklare hvorfor Pythagoras holder.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Lav en enkel, visuel introduktion til trigonometrien. Bygget til 8. klasse.</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

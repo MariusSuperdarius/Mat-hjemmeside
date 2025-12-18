@@ -1,0 +1,17 @@
+:root{--accent:#ff6f61;--accent-2:#4A90E2;--muted:#666}
+
+svg{background:#ffffff;border:1px solid #ececec;border-radius:6px}
+svg text{font-family:inherit;fill:#222}
+
+.controls .presets{margin:8px 0;display:flex;gap:8px;flex-wrap:wrap}
+button.preset, button.preset-tri{background:#fff;border:1px solid #ddd;padding:6px 10px;border-radius:6px;cursor:pointer}
+button.preset:hover{border-color:var(--accent-2);box-shadow:0 1px 4px rgba(74,144,226,0.12)}
+button.preset:focus{outline:3px solid rgba(0,119,204,0.15)}
+
+input[type=range]:focus{outline:none}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+.feedback{background:#fffef6;border-left:4px solid #ffd166;padding:10px;margin-top:8px;border-radius:6px;color:#333}
+.feedback strong{color:var(--accent-2)}
+.pulse{animation: pulse 700ms ease-out}
+@keyframes pulse{from{stroke-width:3}50%{stroke-width:6;opacity:0.9}to{stroke-width:3;opacity:1}}

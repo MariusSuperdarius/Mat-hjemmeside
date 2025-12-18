@@ -1,0 +1,5 @@
+#triSVG{background:#ffffff;border:1px solid #ececec;border-radius:6px}
+#triangle{stroke:var(--accent);fill:rgba(255,111,97,0.06);stroke-width:3}
+#legALabel,#legBLabel,#hypLabel,#pythTri{font-size:13px;fill:#222}
+
+@media (max-width:720px){#triSVG{width:100%;height:auto}}
